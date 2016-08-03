@@ -1,0 +1,55 @@
+From 2fa3dc4ea7c1cdf4eed288de9a6cc5d3a8befddd Mon Sep 17 00:00:00 2001
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Date: Sun, 12 Jul 2015 20:08:34 -0300
+Subject: [PATCH] [media] vb2: Fix compilation breakage when !CONFIG_BUG
+
+Commit 77a3c6fd90c9 ("[media] vb2: Don't WARN when v4l2_buffer.bytesused
+is 0 for multiplanar buffers") uses the __WARN() macro which isn't
+defined when CONFIG_BUG isn't set. This introduces a compilation
+breakage. Fix it by using WARN_ON() instead.
+
+The commit was also broken in that it merged v1 of the patch while a new
+v2 version had been submitted, reviewed and acked. Fix it by
+incorporating the changes from v1 to v2.
+
+Fixes: 77a3c6fd90c9 ("[media] vb2: Don't WARN when v4l2_buffer.bytesused is 0 for multiplanar buffers")
+
+Signed-off-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Acked-by: Larry Finger <Larry.Finger@lwfinger.net>
+Signed-off-by: Hans Verkuil <hans.verkuil@cisco.com>
+Signed-off-by: Mauro Carvalho Chehab <mchehab@osg.samsung.com>
+---
+ drivers/media/v4l2-core/videobuf2-core.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/media/v4l2-core/videobuf2-core.c b/drivers/media/v4l2-core/videobuf2-core.c
+index 0c7b6a7..a14c428 100644
+--- a/drivers/media/v4l2-core/videobuf2-core.c
++++ b/drivers/media/v4l2-core/videobuf2-core.c
+@@ -1254,19 +1254,19 @@ EXPORT_SYMBOL_GPL(vb2_discard_done);
+ 
+ static void vb2_warn_zero_bytesused(struct vb2_buffer *vb)
+ {
+-	static bool __check_once __read_mostly;
++	static bool check_once;
+ 
+-	if (__check_once)
++	if (check_once)
+ 		return;
+ 
+-	__check_once = true;
+-	__WARN();
++	check_once = true;
++	WARN_ON(1);
+ 
+-	pr_warn_once("use of bytesused == 0 is deprecated and will be removed in the future,\n");
++	pr_warn("use of bytesused == 0 is deprecated and will be removed in the future,\n");
+ 	if (vb->vb2_queue->allow_zero_bytesused)
+-		pr_warn_once("use VIDIOC_DECODER_CMD(V4L2_DEC_CMD_STOP) instead.\n");
++		pr_warn("use VIDIOC_DECODER_CMD(V4L2_DEC_CMD_STOP) instead.\n");
+ 	else
+-		pr_warn_once("use the actual size instead.\n");
++		pr_warn("use the actual size instead.\n");
+ }
+ 
+ /**
