@@ -11,7 +11,10 @@ LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a
 PROVIDES += "u-boot"
 
 SRCREV_artik710 = "9e8688135cae391f65e606379c55358a491354ae"
-SRC_URI_artik710 = "git://git@github.com/resin-os/uboot-artik7.git;protocol=ssh"
+SRC_URI_artik710 = " \
+    git://git@github.com/resin-os/uboot-artik7.git;protocol=ssh \
+    file://0001-artik710_raptor.h-Set-CONFIG_ROOT_PART-to-2.patch \
+    file://0002-compiler-gcc6.h-Add-support-for-GCC6.patch"
 
 S = "${WORKDIR}/git"
 
@@ -19,16 +22,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(artik710)"
 
 # Setup uboot environment for each flasher/non-flasher images
-ROOTPART ?= "2"
 do_compile_append() {
     cp `find . -name "env_common.o"` copy_env_common.o
     ${OBJCOPY} -O binary --only-section=.rodata.default_environment `find . -name "copy_env_common.o"`
     tr '\0' '\n' < copy_env_common.o | grep '=' | tee default_envs_emmc.txt default_envs_sd.txt > /dev/null
-
-    # Set root partition's  number:
-    # exit with code 1 when no replacement done so we error out when upstream modifies the u-boot env
-    sed -i "/rootpart=[0-9]/{s//rootpart=${ROOTPART}/;h};\${x;/./{x;q0};x;q1}" default_envs_emmc.txt
-    sed -i "/rootpart=[0-9]/{s//rootpart=${ROOTPART}/;h};\${x;/./{x;q0};x;q1}" default_envs_sd.txt
 
     # root device should be (mmcblk)1 when booting the SD card flasher image (exit with code 1 when no replacement done so we error out when upstream modifies the u-boot env)
     sed -i '/rootdev=[0-9]\{1\}/{s//rootdev=1/;h};${x;/./{x;q0};x;q1}' default_envs_sd.txt
