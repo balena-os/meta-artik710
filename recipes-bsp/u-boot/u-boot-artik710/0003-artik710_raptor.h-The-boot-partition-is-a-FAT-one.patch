@@ -1,0 +1,46 @@
+From 404524068b8134cd0629f95822540d0df6480424 Mon Sep 17 00:00:00 2001
+From: Andrei Gherzan <andrei@resin.io>
+Date: Thu, 4 Aug 2016 12:53:53 +0200
+Subject: [PATCH] artik710_raptor.h: The boot partition is a FAT one
+
+Upstream-Status: Inappropiate [Configuration]
+
+Signed-off-by: Andrei Gherzan <andrei@resin.io>
+---
+ include/configs/artik710_raptor.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/include/configs/artik710_raptor.h b/include/configs/artik710_raptor.h
+index aad8a42..35d0e44 100644
+--- a/include/configs/artik710_raptor.h
++++ b/include/configs/artik710_raptor.h
+@@ -318,12 +318,12 @@
+ 				"number=0$loop; "			\
+ 			"else number=$loop; "				\
+ 			"fi; "						\
+-			"ext4load mmc $rootdev:$bootpart $fdtaddr s5p6818-artik710-raptor-rev${number}.dtb && setexpr success 1; " \
++			"fatload mmc $rootdev:$bootpart $fdtaddr s5p6818-artik710-raptor-rev${number}.dtb && setexpr success 1; " \
+ 			"setexpr loop $loop - 1; "			\
+ 			"done; "					\
+ 		"if test $success -eq 0; then "				\
+-			"ext4load mmc $rootdev:$bootpart $fdtaddr s5p6818-artik710-raptor-rev00.dtb || "	\
+-			"ext4load mmc $rootdev:$bootpart $fdtaddr s5p6818-artik710-raptor.dtb; "	\
++			"fatload mmc $rootdev:$bootpart $fdtaddr s5p6818-artik710-raptor-rev00.dtb || "	\
++			"fatload mmc $rootdev:$bootpart $fdtaddr s5p6818-artik710-raptor.dtb; "	\
+ 		"fi; \0"						\
+ 	"console=" CONFIG_DEFAULT_CONSOLE				\
+ 	"consoleon=set console=" CONFIG_DEFAULT_CONSOLE			\
+@@ -350,8 +350,8 @@
+ 		"run factory_save\0"					\
+ 	"boot_cmd_initrd="						\
+ 		"run load_fdt;"						\
+-		"ext4load mmc ${rootdev}:${bootpart} $kerneladdr $kernel_file;" \
+-		"ext4load mmc ${rootdev}:${bootpart} $ramdiskaddr $ramdisk_file;" \
++		"fatload mmc ${rootdev}:${bootpart} $kerneladdr $kernel_file;" \
++		"fatload mmc ${rootdev}:${bootpart} $ramdiskaddr $ramdisk_file;" \
+ 		"bootm $kerneladdr - $fdtaddr\0"		\
+ 	"ramfsboot=setenv bootargs ${console} "				\
+ 		"root=/dev/ram0 ${root_rw} initrd=${ramdiskaddr},16M ramdisk=16384 "	\
+-- 
+2.1.4
+

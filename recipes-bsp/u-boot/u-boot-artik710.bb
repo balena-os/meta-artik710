@@ -14,7 +14,8 @@ SRCREV_artik710 = "9e8688135cae391f65e606379c55358a491354ae"
 SRC_URI_artik710 = " \
     git://git@github.com/resin-os/uboot-artik7.git;protocol=ssh \
     file://0001-artik710_raptor.h-Set-CONFIG_ROOT_PART-to-2.patch \
-    file://0002-compiler-gcc6.h-Add-support-for-GCC6.patch"
+    file://0002-compiler-gcc6.h-Add-support-for-GCC6.patch \
+    file://0003-artik710_raptor.h-The-boot-partition-is-a-FAT-one.patch"
 
 S = "${WORKDIR}/git"
 
