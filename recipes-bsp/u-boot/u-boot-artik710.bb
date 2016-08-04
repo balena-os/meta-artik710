@@ -2,7 +2,7 @@
 
 require recipes-bsp/u-boot/u-boot.inc
 
-DEPENDS += "dtc-native mksinglebootloader-tools"
+DEPENDS += "dtc-native mksinglebootloader-tools secure-boot-artik710"
 
 DESCRIPTION = "u-boot which includes support for the Samsung Artik boards."
 LICENSE = "GPLv2+"
