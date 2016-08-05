@@ -1,13 +1,5 @@
 #!/bin/sh
 
-function gen_bluez_conf {
-cat > /etc/bluetooth/main.conf << EOF
-[General]
-Name = $1
-EOF
-	sync
-}
-
 function gen_bd_addr {
 	[ -d /opt/.bd_addr ] || rm -f /opt/.bd_addr
 
@@ -16,11 +8,6 @@ function gen_bd_addr {
 	chmod 400 /opt/.bd_addr
 	sync
 }
-
-TTY_NUM=0
-ARTIK_DEV=ARTIK710
-
-[ -d /etc/bluetooth/main.conf ] || gen_bluez_conf $ARTIK_DEV
 
 for x in $(cat /proc/cmdline); do
 	case $x in
@@ -44,7 +31,9 @@ fi
 
 pushd `dirname $0`
 
-./brcm_patchram_plus --patchram BCM4354_003.001.012.0301.0000_Samsung_Artik_TEST_ONLY.hcd \
+# BT use uar1 on ARTIK7.
+TTY_NUM=1
+./brcm_patchram_plus --patchram BCM4345C0_003.001.025.0108.0000_Generic_UART_37_4MHz_wlbga_ref_iLNA_iTR_eLG_BT40_test_only.hcd \
 	--no2bytes --baudrate 3000000 \
 	--use_baudrate_for_download /dev/ttySAC${TTY_NUM} \
 	--bd_addr ${BD_ADDR} \
