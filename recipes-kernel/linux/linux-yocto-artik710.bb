@@ -2,7 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 LINUX_VERSION = "4.1.15"
 SRC_URI = " \
-    git://git@github.com/resin-os/linux-artik7.git;protocol=ssh \
+    git://github.com/resin-os/linux-artik7.git;protocol=https \
     file://2fa3dc4ea7c1cdf4eed288de9a6cc5d3a8befddd.patch \
     "
 SRCREV = "2c84f106d878f9e4f40f6f023f47f1e63e4a0d43"
