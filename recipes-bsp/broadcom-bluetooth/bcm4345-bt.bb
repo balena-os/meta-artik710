@@ -25,7 +25,7 @@ RDEPENDS_${PN} = " \
 
 do_install() {
         install -d  ${D}/etc/bluetooth/
-        install -m 0755 ${WORKDIR}/BCM4345C0_003.001.025.0108.0000_Generic_UART_37_4MHz_wlbga_ref_iLNA_iTR_eLG_BT40_test_only.hcd ${WORKDIR}/brcm_patchram_plus ${WORKDIR}/fwdown.sh ${WORKDIR}/hciconf.sh ${D}/etc/bluetooth/
+        install -m 0755 ${WORKDIR}/BCM4345C0_003.001.025.0111.0194.hcd ${WORKDIR}/brcm_patchram_plus ${WORKDIR}/fwdown.sh ${WORKDIR}/hciconf.sh ${D}/etc/bluetooth/
 
         install -d ${D}/etc/udev/rules.d/
         install -m 0755 ${WORKDIR}/10-local.rules ${D}/etc/udev/rules.d/
