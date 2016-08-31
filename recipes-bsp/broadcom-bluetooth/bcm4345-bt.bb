@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENCE.broadcom_bcm43xx;md5=3160c14df7228891b868060e
 
 SRC_URI = " \
     file://10-local.rules \
-    file://BCM4345C0_003.001.025.0108.0000_Generic_UART_37_4MHz_wlbga_ref_iLNA_iTR_eLG_BT40_test_only.hcd \
+    file://BCM4345C0_003.001.025.0111.0194.hcd \
     file://LICENCE.broadcom_bcm43xx \
     file://brcm-bt-firmware.service \
     file://brcm_patchram_plus \
