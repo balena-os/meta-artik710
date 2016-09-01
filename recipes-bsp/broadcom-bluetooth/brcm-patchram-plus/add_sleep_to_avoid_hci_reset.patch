@@ -1,0 +1,27 @@
+This patch adds stable time to avoid hci_reset fail after firmware update and abnormal uart state.
+
+Upstream-Status: Pending
+
+Signed-off-by: Florin Sarbu <florin@resin.io>
+
+Index: brcm_patchram_plus/brcm_patchram_plus.c
+===================================================================
+--- brcm_patchram_plus.orig/brcm_patchram_plus.c
++++ brcm_patchram_plus/brcm_patchram_plus.c
+@@ -660,6 +660,7 @@ proc_patchram()
+ 		cfsetispeed(&termios, B115200);
+ 		tcsetattr(uart_fd, TCSANOW, &termios);
+ 	}
++	usleep(150000);
+ 	proc_reset();
+ }
+ 
+@@ -796,6 +797,8 @@ main (int argc, char **argv)
+ 		exit(2);
+ 	}
+ 
++	usleep(10000);
++
+ 	init_uart();
+ 
+ 	proc_reset();

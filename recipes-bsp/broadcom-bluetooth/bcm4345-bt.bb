@@ -1,4 +1,4 @@
-DESCRIPTION = "Broadcom Bluetooth fw files and patch utility"
+DESCRIPTION = "Broadcom Bluetooth fw files"
 SECTION = "connectivity"
 
 LICENSE = "Proprietary"
@@ -9,7 +9,6 @@ SRC_URI = " \
     file://BCM4345C0_003.001.025.0111.0194.hcd \
     file://LICENCE.broadcom_bcm43xx \
     file://brcm-bt-firmware.service \
-    file://brcm_patchram_plus \
     file://fwdown.sh \
     file://hciconf.sh \
     "
@@ -21,11 +20,12 @@ SYSTEMD_SERVICE_${PN} = "brcm-bt-firmware.service"
 
 RDEPENDS_${PN} = " \
     bluez5 \
+    brcm-patchram-plus \
     "
 
 do_install() {
         install -d  ${D}/etc/bluetooth/
-        install -m 0755 ${WORKDIR}/BCM4345C0_003.001.025.0111.0194.hcd ${WORKDIR}/brcm_patchram_plus ${WORKDIR}/fwdown.sh ${WORKDIR}/hciconf.sh ${D}/etc/bluetooth/
+        install -m 0755 ${WORKDIR}/BCM4345C0_003.001.025.0111.0194.hcd ${WORKDIR}/fwdown.sh ${WORKDIR}/hciconf.sh ${D}/etc/bluetooth/
 
         install -d ${D}/etc/udev/rules.d/
         install -m 0755 ${WORKDIR}/10-local.rules ${D}/etc/udev/rules.d/
@@ -45,5 +45,3 @@ do_install() {
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "(artik710)"
-
-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
