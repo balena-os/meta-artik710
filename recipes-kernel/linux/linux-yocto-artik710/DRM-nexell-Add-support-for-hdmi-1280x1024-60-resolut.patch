@@ -1,0 +1,71 @@
+From 31981ef3649177aec2ca218cfdd2e9a6b1e4995d Mon Sep 17 00:00:00 2001
+From: sunghwansoon <hs2704.sung@samsung.com>
+Date: Fri, 23 Dec 2016 15:19:43 +0900
+Subject: [PATCH] DRM: nexell: Add support for hdmi 1280x1024@60 resolution
+
+This patch adds 1280X1024@60 to a list of the supported format of
+the artik530/710 HDMI
+
+Change-Id: Idde0547c68c36c0571f6ae33fc832f39238a333d
+Signed-off-by: sunghwansoon <hs2704.sung@samsung.com>
+Signed-off-by: Yadwinder Singh Brar <y.brar@samsung.com>
+
+Upstream-Status: Backport
+---
+ drivers/gpu/drm/nexell/soc/s5pxx18_hdmi_presets.c | 26 ++++++++++++++++++++++-
+ 1 file changed, 25 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/nexell/soc/s5pxx18_hdmi_presets.c b/drivers/gpu/drm/nexell/soc/s5pxx18_hdmi_presets.c
+index 97250e2..df692fd 100644
+--- a/drivers/gpu/drm/nexell/soc/s5pxx18_hdmi_presets.c
++++ b/drivers/gpu/drm/nexell/soc/s5pxx18_hdmi_presets.c
+@@ -2263,6 +2263,17 @@ static const struct hdmi_preset hdmi_conf_1080p30_tb = {
+ 	.vic = 34,
+ };
+ 
++static const struct hdmi_preset hdmi_conf_1024p60 = {
++	.mode = {
++		 .pixelclock = 108000000,
++		 .h_as = 1280, .h_sw = 112, .h_bp = 248, .h_fp = 48, .h_si = 0,
++		 .v_as = 1024, .v_sw = 3, .v_bp = 38, .v_fp = 1, .v_si = 0,
++		 .refresh = 60,
++		 .name = "1280x1024p@60",
++		 .flags = 0,
++		 },
++};
++
+ /*
+  * PHY preset data tables
+  */
+@@ -2322,6 +2333,13 @@ static const u8 hdmiphy_preset_74_25[32] = {
+ 	0xa5, 0x24, 0x01, 0x00, 0x00, 0x01, 0x80, 0x10,
+ };
+ 
++static const u8 hdmiphy_preset_108[32] = {
++	0x51, 0x2d, 0x15, 0x40, 0x01, 0x00, 0xc8, 0x82,
++	0xc8, 0x0e, 0xd9, 0x45, 0xa0, 0xac, 0x80, 0x08,
++	0x80, 0x09, 0x84, 0x05, 0x22, 0x24, 0x86, 0x54,
++	0xc7, 0x25, 0x03, 0x00, 0x00, 0x01, 0x80, 0x10,
++};
++
+ static const u8 hdmiphy_preset_148_352[32] = {
+ 	0xd1, 0x1f, 0x00, 0x40, 0x5b, 0xef, 0xc8, 0x81,
+ 	0xe8, 0xb9, 0xd8, 0x45, 0xa0, 0xac, 0x80, 0x0a,
+@@ -2410,7 +2428,13 @@ const struct hdmi_conf hdmi_conf[] = {
+ 	 .phy_data = hdmiphy_preset_148_5,
+ 	 .support = true,
+ 	},
+-	{ /*  : 1920x1080p@24 */
++	{ /* 9 : 1280x1024@60 */
++	 .preset = &hdmi_conf_1024p60,
++	 .format = &_format_2d,
++	 .phy_data = hdmiphy_preset_108,
++	 .support = true,
++	},
++	{ /* 10 : 1920x1080p@24 */
+ 	 .preset = &hdmi_conf_1080p24,
+ 	 .format = &_format_2d,
+ 	 .phy_data = hdmiphy_preset_74_25,
+-- 
+1.9.1
+

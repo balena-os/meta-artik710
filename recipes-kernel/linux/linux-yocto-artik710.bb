@@ -5,6 +5,7 @@ SRC_URI = " \
     git://git@github.com/resin-os/linux-artik7.git;protocol=ssh \
     file://2fa3dc4ea7c1cdf4eed288de9a6cc5d3a8befddd.patch \
     file://compile_mali_kernel_module_out_of_tree.patch \
+    file://DRM-nexell-Add-support-for-hdmi-1280x1024-60-resolut.patch \
     "
 SRCREV = "fc1a34e44e53a9d063c5d7a618e7fb3b3b01b07d"
 
