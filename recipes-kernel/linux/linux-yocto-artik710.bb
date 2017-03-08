@@ -1,13 +1,12 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-LINUX_VERSION = "4.1.15"
+LINUX_VERSION = "4.4.19"
 SRC_URI = " \
-    git://git@github.com/resin-os/linux-artik7.git;protocol=ssh \
-    file://2fa3dc4ea7c1cdf4eed288de9a6cc5d3a8befddd.patch \
+    git://git@github.com/SamsungARTIK/linux-artik.git;protocol=ssh;branch=A710/v4.4 \
     file://compile_mali_kernel_module_out_of_tree.patch \
     file://DRM-nexell-Add-support-for-hdmi-1280x1024-60-resolut.patch \
     "
-SRCREV = "fc1a34e44e53a9d063c5d7a618e7fb3b3b01b07d"
+SRCREV = "b3337cbeced5c49415aa405a355d07bb99f6ed43"
 
 inherit kernel
 require recipes-kernel/linux/linux-yocto.inc
