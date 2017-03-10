@@ -42,7 +42,7 @@ do_compile_append() {
     # generate FIP (Firmware Image Package) (fip-nonsecure.bin) from the uboot binary
     tools/fip_create/fip_create --dump --bl33 u-boot.bin fip-nonsecure.bin
     # generate nexell image (fip-nonsecure.img) from the FIP binary
-    tools/nexell/SECURE_BINGEN -c ${BASE_MACH} -t 3rdboot -n ${S}/tools/nexell/nsih/raptor-64.txt -i ${S}/fip-nonsecure.bin -o ${S}/fip-nonsecure.img -l ${FIP_LOAD_ADDR} -e 0x00000000
+    tools/nexell/SECURE_BINGEN -c ${BASE_MACH} -t 3rdboot -n ${S}/tools/nexell/nsih/raptor-64.txt -i ${B}/fip-nonsecure.bin -o ${B}/fip-nonsecure.img -l ${FIP_LOAD_ADDR} -e 0x00000000
 }
 
 do_singlebootloader() {
@@ -60,7 +60,7 @@ do_singlebootloader() {
 }
 
 do_deploy_append () {
-    install ${S}/params_emmc.bin ${S}/params_sd.bin ${S}/fip-nonsecure.img ${DEPLOYDIR}
+    install ${B}/params_emmc.bin ${B}/params_sd.bin ${B}/fip-nonsecure.img ${DEPLOYDIR}
     if [ "${BOOTLOADER_SINGLEIMAGE}" = "1" ]; then
         install ${B}/singleimage-emmcboot.bin ${B}/singleimage-sdboot.bin ${DEPLOYDIR}
     fi

@@ -13,7 +13,7 @@ SRC_URI = " \
 S = "${WORKDIR}/git/brcm_patchram_plus"
 
 do_compile() {
-    ${CC} brcm_patchram_plus.c -o brcm_patchram_plus
+    ${CC} ${LDFLAGS} brcm_patchram_plus.c -o brcm_patchram_plus
 }
 
 do_install() {
