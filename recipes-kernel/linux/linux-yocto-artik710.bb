@@ -2,7 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 LINUX_VERSION = "4.4.19"
 SRC_URI = " \
-    git://git@github.com/SamsungARTIK/linux-artik.git;protocol=ssh;branch=A710/v4.4 \
+    git://github.com/SamsungARTIK/linux-artik.git;protocol=https;branch=A710/v4.4 \
     file://compile_mali_kernel_module_out_of_tree.patch \
     file://DRM-nexell-Add-support-for-hdmi-1280x1024-60-resolut.patch \
     "
