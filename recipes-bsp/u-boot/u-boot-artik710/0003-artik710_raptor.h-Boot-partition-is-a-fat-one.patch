@@ -1,11 +1,19 @@
+From 3de34fe2ec7a84c1ba07b71ae3739580da774492 Mon Sep 17 00:00:00 2001
+From: Andrei Gherzan <andrei@resin.io>
+Date: Mon, 13 Mar 2017 20:32:22 +0100
+Subject: [PATCH 3/7] artik710_raptor.h: Boot partition is a fat one
+
 Upstream-Status: Inappropiate [Configuration]
 
-Signed-off-by: Florin Sarbu <florin@resin.io>
+Signed-off-by: Andrei Gherzan <andrei@resin.io>
+---
+ include/configs/artik710_raptor.h | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-Index: git/include/configs/artik710_raptor.h
-===================================================================
---- git.orig/include/configs/artik710_raptor.h
-+++ git/include/configs/artik710_raptor.h
+diff --git a/include/configs/artik710_raptor.h b/include/configs/artik710_raptor.h
+index 677bf80..a9a0c0e 100644
+--- a/include/configs/artik710_raptor.h
++++ b/include/configs/artik710_raptor.h
 @@ -360,14 +360,14 @@
  				"number=0$loop; "			\
  			"else number=$loop; "				\
@@ -36,3 +44,6 @@ Index: git/include/configs/artik710_raptor.h
  	"boot_cmd_initrd="						\
  		"run load_fdt; run load_kernel; run load_initrd;"	\
  		"booti $kerneladdr $ramdiskaddr $fdtaddr\0"		\
+-- 
+2.7.4
+

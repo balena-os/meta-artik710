@@ -1,7 +1,7 @@
-From 89ae9c35dd21b911d11bf93be5e40390b3385931 Mon Sep 17 00:00:00 2001
+From 44e9ef9673d532a51a4a5f7d2c06308d2941cee7 Mon Sep 17 00:00:00 2001
 From: Andrei Gherzan <andrei@resin.io>
 Date: Wed, 3 Aug 2016 17:10:29 +0100
-Subject: [PATCH 2/2] compiler-gcc6.h: Add support for GCC6
+Subject: [PATCH 2/7] compiler-gcc6.h: Add support for GCC6
 
 Upstream-Status: Inappropiate [Configuration]
 
@@ -83,5 +83,5 @@ index 0000000..c8c5659
 +#define __HAVE_BUILTIN_BSWAP16__
 +#endif /* CONFIG_ARCH_USE_BUILTIN_BSWAP */
 -- 
-2.9.0
+2.7.4
 
