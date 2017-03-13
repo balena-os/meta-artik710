@@ -1,0 +1,27 @@
+From 9b5e90dfaae317ea8da2261854233b6136553a1f Mon Sep 17 00:00:00 2001
+From: Andrei Gherzan <andrei@resin.io>
+Date: Mon, 13 Mar 2017 21:33:31 +0100
+Subject: [PATCH] arm64: errata: Add -mpc-relative-literal-loads to build flags
+
+Upstream-Status: Backport [https://patchwork.kernel.org/patch/8116971/]
+
+Signed-off-by: Andrei Gherzan <andrei@resin.io>
+---
+ arch/arm64/Makefile | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm64/Makefile b/arch/arm64/Makefile
+index 3258174..52aef3c 100644
+--- a/arch/arm64/Makefile
++++ b/arch/arm64/Makefile
+@@ -18,6 +18,7 @@ GZFLAGS		:=-9
+ KBUILD_DEFCONFIG := defconfig
+ 
+ KBUILD_CFLAGS	+= -mgeneral-regs-only
++KBUILD_CFLAGS += $(call cc-option, -mpc-relative-literal-loads)
+ ifeq ($(CONFIG_CPU_BIG_ENDIAN), y)
+ KBUILD_CPPFLAGS	+= -mbig-endian
+ AS		+= -EB
+-- 
+2.7.4
+
