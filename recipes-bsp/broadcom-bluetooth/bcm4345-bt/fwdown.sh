@@ -33,7 +33,7 @@ pushd `dirname $0`
 
 # BT use uar1 on ARTIK7.
 TTY_NUM=1
-./brcm_patchram_plus --patchram BCM4345C0_003.001.025.0111.0194.hcd \
+./brcm_patchram_plus --patchram BCM4345C0_003.001.025.0111.0205.hcd \
 	--no2bytes --baudrate 3000000 \
 	--use_baudrate_for_download /dev/ttySAC${TTY_NUM} \
 	--bd_addr ${BD_ADDR} \
