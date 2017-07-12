@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENCE.broadcom_bcm43xx;md5=3160c14df7228891b868060e
 
 SRC_URI = " \
     file://10-local.rules \
-    file://BCM4345C0_003.001.025.0111.0194.hcd \
+    file://BCM4345C0_003.001.025.0111.0205.hcd \
     file://LICENCE.broadcom_bcm43xx \
     file://brcm-bt-firmware.service \
     file://fwdown.sh \
@@ -29,7 +29,7 @@ RDEPENDS_${PN} = " \
 
 do_install() {
     install -d  ${D}/etc/bluetooth/
-    install -m 0755 ${WORKDIR}/BCM4345C0_003.001.025.0111.0194.hcd ${WORKDIR}/fwdown.sh ${WORKDIR}/hciconf.sh ${D}/etc/bluetooth/
+    install -m 0755 ${WORKDIR}/BCM4345C0_003.001.025.0111.0205.hcd ${WORKDIR}/fwdown.sh ${WORKDIR}/hciconf.sh ${D}/etc/bluetooth/
 
     install -d ${D}/etc/udev/rules.d/
     install -m 0755 ${WORKDIR}/10-local.rules ${D}/etc/udev/rules.d/
