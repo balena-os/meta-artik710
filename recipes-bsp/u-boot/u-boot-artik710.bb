@@ -12,7 +12,7 @@ PROVIDES += "u-boot"
 
 SRCREV_artik710 = "8a9ae34f41a0c992344aa2dd1b1cc40d01161305"
 SRC_URI_artik710 = " \
-    git://git@github.com/resin-os/uboot-artik7.git;protocol=ssh \
+    git://github.com/resin-os/uboot-artik7.git \
     file://0001-artik710_raptor.h-Set-CONFIG_ROOT_PART-to-2.patch \
     file://0002-compiler-gcc6.h-Add-support-for-GCC6.patch \
     file://0003-artik710_raptor.h-Boot-partition-is-a-fat-one.patch \
